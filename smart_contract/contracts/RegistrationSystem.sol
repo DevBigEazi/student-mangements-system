@@ -23,7 +23,8 @@ contract RegistrationSystem {
     }
 
     function registerStudent(
-        string memory _fullName, string memory _class
+        string memory _fullName,
+        string memory _class
     ) external onlyAdmin returns (bool) {
         require(msg.sender != address(0), "Address zero not allowed");
 
@@ -45,7 +46,9 @@ contract RegistrationSystem {
         return true;
     }
 
-    function removeStudent(uint256 _studentId) external onlyAdmin returns(bool) {
+    function removeStudent(
+        uint256 _studentId
+    ) external onlyAdmin returns (bool) {
         require(msg.sender != address(0), "Address zero not allowed");
 
         require(_studentId < students.length, "Out of bound!");
@@ -59,7 +62,11 @@ contract RegistrationSystem {
         return true;
     }
 
-    function getStudentById(uint256 _studentId) external view returns (StudentDetails memory) {
+    function getStudentById(
+        uint256 _studentId
+    ) external view returns (StudentDetails memory) {
+        require(_studentId < students.length, "Out of bound!");
+
         StudentDetails memory studentDetails = students[_studentId];
 
         return studentDetails;
